@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,112 +13,116 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-end;
       height: 100vh;
       margin: 0;
       overflow: hidden;
+      position: relative;
     }
 
     h1 {
       color: #fff100;
       text-shadow: 2px 2px #000;
-      margin-bottom: 20px;
       font-size: 1.2rem;
+      margin: 30px 0 10px;
       text-align: center;
     }
 
-    p {
-      color: #fff;
-      background: rgba(0, 0, 0, 0.5);
-      padding: 12px;
-      border-radius: 10px;
+    #message {
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
       max-width: 90%;
       text-align: center;
-      line-height: 1.5;
     }
 
-    .btn {
-      background-image: url('https://i.imgur.com/jiIfkYF.png');
-      background-size: cover;
-      border: none;
-      padding: 20px 30px;
-      font-family: 'Press Start 2P', cursive;
-      font-size: 0.7rem;
-      color: white;
-      cursor: pointer;
-      margin-top: 20px;
-      box-shadow: 0 4px #999;
-      transition: transform 0.2s ease;
-    }
-
-    .btn:active {
-      transform: translateY(4px);
-      box-shadow: none;
-    }
-
-    .mario {
-      position: absolute;
-      animation: jumpUp 1.5s ease forwards;
-      pointer-events: none;
+    .brick-box {
+      width: 60px;
+      height: 60px;
+      background: url('https://i.imgur.com/ESbFzjt.png') no-repeat center/cover;
+      margin-bottom: 20px;
+      position: relative;
     }
 
     .coin {
+      width: 30px;
       position: absolute;
-      animation: jumpUp 1.2s ease forwards;
-      pointer-events: none;
+      top: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: coinUp 0.8s ease-out forwards;
     }
 
-    @keyframes jumpUp {
-      0% { transform: translateY(0); opacity: 1; }
-      50% { transform: translateY(-150px); }
-      100% { transform: translateY(0); opacity: 0; }
+    @keyframes coinUp {
+      0% { opacity: 1; transform: translateX(-50%) translateY(0); }
+      100% { opacity: 0; transform: translateX(-50%) translateY(-100px); }
+    }
+
+    button {
+      background: url('https://i.imgur.com/5Z7K0u2.png') no-repeat center;
+      background-size: cover;
+      width: 160px;
+      height: 50px;
+      color: white;
+      font-size: 0.6rem;
+      border: none;
+      font-family: 'Press Start 2P', cursive;
+      cursor: pointer;
+      margin-bottom: 40px;
+    }
+
+    .mario {
+      width: 60px;
+      position: absolute;
+      bottom: 50px;
+      animation: jumpMario 0.5s ease-out forwards;
+    }
+
+    @keyframes jumpMario {
+      0% { bottom: 50px; }
+      50% { bottom: 150px; }
+      100% { bottom: 50px; }
     }
   </style>
 </head>
 <body>
+
   <h1>Semangat Marioo! 🍄</h1>
-  <p id="message">Kamu luar biasa dan kuat banget 💪✨</p>
-  <button class="btn" onclick="showMessage()">Klik di sini!</button>
-  <div id="marioContainer"></div>
+  <div id="message">Kamu luar biasa! 💪✨</div>
+  <div class="brick-box" id="brickBox"></div>
+  <button onclick="triggerAction()">Klik di sini!</button>
 
   <script>
     const messages = [
-      "Kamu luar biasa dan kuat banget 💪✨",
-      "Semangat terus Marioo! Kamu bikin bangga ❤️",
-      "Hari ini mungkin berat, tapi kamu lebih kuat! 🌟",
-      "Aku percaya kamu bisa melalui semuanya 💖",
-      "Rehat itu bukan lemah, itu tanda bijak 🍵",
-      "Marioo itu keren banget, jangan lupa itu! 😎",
-      "Kamu udah sejauh ini, hebat! Teruskan ya 💫",
-      "Semua usaha kamu nggak sia-sia kok ✨",
-      "Aku dukung kamu terus, dari sini! 🫶",
-      "Kamu bikin dunia ini lebih cerah! 🌈"
+      "Kamu keren banget! 💥",
+      "Aku percaya kamu bisa! 🚀",
+      "Semangat terus yaa 💛",
+      "Jangan menyerah, aku dukung kamu! ✨",
+      "Satu langkah lagi! 💫",
+      "Marioo, kamu inspirasi! 🏆"
     ];
+    let index = 0;
 
-    function showMessage() {
-      const msg = document.getElementById("message");
-      const randomIndex = Math.floor(Math.random() * messages.length);
-      msg.innerText = messages[randomIndex];
+    function triggerAction() {
+      // Ganti pesan
+      index = (index + 1) % messages.length;
+      document.getElementById("message").textContent = messages[index];
 
-      // Tambahkan Mario
-      const mario = document.createElement("div");
+      // Tambah animasi Mario
+      const mario = document.createElement("img");
+      mario.src = "https://i.imgur.com/sN0bGvB.gif"; // animasi mario lompat
       mario.className = "mario";
-      mario.style.left = Math.random() * 80 + 10 + "%";
-      mario.innerHTML = '<img src="https://i.imgur.com/Qw6LJpV.gif" width="60" />';
-      document.getElementById("marioContainer").appendChild(mario);
+      document.body.appendChild(mario);
+      setTimeout(() => mario.remove(), 600);
 
-      // Tambahkan Koin
-      const coin = document.createElement("div");
+      // Tambah animasi koin
+      const coin = document.createElement("img");
+      coin.src = "https://i.imgur.com/o3bDg0B.gif"; // koin berputar
       coin.className = "coin";
-      coin.style.left = Math.random() * 80 + 10 + "%";
-      coin.innerHTML = '<img src="https://i.imgur.com/KxXjMEP.gif" width="30" />';
-      document.getElementById("marioContainer").appendChild(coin);
-
-      // Hapus setelah animasi selesai
-      setTimeout(() => {
-        mario.remove();
-        coin.remove();
-      }, 1500);
+      document.getElementById("brickBox").appendChild(coin);
+      setTimeout(() => coin.remove(), 800);
     }
   </script>
 </body>
