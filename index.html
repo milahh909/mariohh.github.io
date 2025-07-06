@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Semangat Buat Marioo 🍄</title>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
     body {
       font-family: 'Press Start 2P', cursive;
-      background: linear-gradient(#a3d5ff, #ffffff);
+      background: linear-gradient(#87ceeb, #fff);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -17,53 +18,67 @@
       margin: 0;
       overflow: hidden;
     }
+
     h1 {
       color: #fff100;
       text-shadow: 2px 2px #000;
       margin-bottom: 20px;
+      font-size: 1.2rem;
       text-align: center;
     }
+
     p {
       color: #fff;
       background: rgba(0, 0, 0, 0.5);
-      padding: 12px 16px;
-      border-radius: 12px;
-      margin-bottom: 20px;
-      min-height: 60px;
-      text-align: center;
-    }
-    button {
-      background-color: #ff0000;
-      color: white;
-      border: 3px solid #fff;
-      padding: 14px 24px;
+      padding: 12px;
       border-radius: 10px;
-      font-size: 1rem;
+      max-width: 90%;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    .btn {
+      background-image: url('https://i.imgur.com/jiIfkYF.png');
+      background-size: cover;
+      border: none;
+      padding: 20px 30px;
+      font-family: 'Press Start 2P', cursive;
+      font-size: 0.7rem;
+      color: white;
       cursor: pointer;
-      transition: transform 0.2s;
+      margin-top: 20px;
+      box-shadow: 0 4px #999;
+      transition: transform 0.2s ease;
     }
-    button:hover {
-      transform: scale(1.1);
+
+    .btn:active {
+      transform: translateY(4px);
+      box-shadow: none;
     }
+
     .mario {
       position: absolute;
-      bottom: -100px;
-      font-size: 60px;
-      animation: jumpUp 1s ease-out forwards;
-      left: 50%;
-      transform: translateX(-50%);
+      animation: jumpUp 1.5s ease forwards;
+      pointer-events: none;
     }
+
+    .coin {
+      position: absolute;
+      animation: jumpUp 1.2s ease forwards;
+      pointer-events: none;
+    }
+
     @keyframes jumpUp {
-      0% { bottom: -100px; }
-      50% { bottom: 120px; }
-      100% { bottom: -100px; }
+      0% { transform: translateY(0); opacity: 1; }
+      50% { transform: translateY(-150px); }
+      100% { transform: translateY(0); opacity: 0; }
     }
   </style>
 </head>
 <body>
   <h1>Semangat Marioo! 🍄</h1>
   <p id="message">Kamu luar biasa dan kuat banget 💪✨</p>
-  <button onclick="showMessage()">Klik di sini!</button>
+  <button class="btn" onclick="showMessage()">Klik di sini!</button>
   <div id="marioContainer"></div>
 
   <script>
@@ -81,17 +96,29 @@
     ];
 
     function showMessage() {
+      const msg = document.getElementById("message");
       const randomIndex = Math.floor(Math.random() * messages.length);
-      document.getElementById("message").innerText = messages[randomIndex];
+      msg.innerText = messages[randomIndex];
 
+      // Tambahkan Mario
       const mario = document.createElement("div");
       mario.className = "mario";
-      mario.innerText = "🧑‍🔧";
+      mario.style.left = Math.random() * 80 + 10 + "%";
+      mario.innerHTML = '<img src="https://i.imgur.com/Qw6LJpV.gif" width="60" />';
       document.getElementById("marioContainer").appendChild(mario);
 
+      // Tambahkan Koin
+      const coin = document.createElement("div");
+      coin.className = "coin";
+      coin.style.left = Math.random() * 80 + 10 + "%";
+      coin.innerHTML = '<img src="https://i.imgur.com/KxXjMEP.gif" width="30" />';
+      document.getElementById("marioContainer").appendChild(coin);
+
+      // Hapus setelah animasi selesai
       setTimeout(() => {
         mario.remove();
-      }, 1000);
+        coin.remove();
+      }, 1500);
     }
   </script>
 </body>
