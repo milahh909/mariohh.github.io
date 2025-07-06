@@ -8,10 +8,7 @@
   <style>
     body {
       font-family: 'Press Start 2P', cursive;
-      background: url('https://i.imgur.com/jHSHxqN.png') repeat-x bottom / contain,
-                  linear-gradient(#87ceeb, #fff);
-      background-repeat: repeat-x;
-      background-size: auto 200px, cover;
+      background: linear-gradient(#a3d5ff, #ffffff);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -23,56 +20,78 @@
     h1 {
       color: #fff100;
       text-shadow: 2px 2px #000;
-      margin-bottom: 10px;
+      margin-bottom: 20px;
+      text-align: center;
     }
     p {
       color: #fff;
       background: rgba(0, 0, 0, 0.5);
-      padding: 10px;
-      border-radius: 10px;
-      margin: 0 20px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      min-height: 60px;
       text-align: center;
     }
     button {
-      margin-top: 20px;
-      padding: 16px 28px;
-      font-size: 1rem;
-      font-family: 'Press Start 2P', cursive;
       background-color: #ff0000;
       color: white;
-      border: 4px solid #ffffff;
-      border-radius: 12px;
+      border: 3px solid #fff;
+      padding: 14px 24px;
+      border-radius: 10px;
+      font-size: 1rem;
       cursor: pointer;
-      transition: transform 0.2s ease;
+      transition: transform 0.2s;
     }
     button:hover {
       transform: scale(1.1);
     }
-    .coin {
+    .mario {
       position: absolute;
-      font-size: 2rem;
-      animation: jumpUp 1.5s ease-in forwards;
-      pointer-events: none;
+      bottom: -100px;
+      font-size: 60px;
+      animation: jumpUp 1s ease-out forwards;
+      left: 50%;
+      transform: translateX(-50%);
     }
     @keyframes jumpUp {
-      0% { transform: translateY(0); opacity: 1; }
-      100% { transform: translateY(-200px); opacity: 0; }
+      0% { bottom: -100px; }
+      50% { bottom: 120px; }
+      100% { bottom: -100px; }
     }
   </style>
 </head>
 <body>
   <h1>Semangat Marioo! 🍄</h1>
-  <p>Kamu hebat banget! Capek kerja itu bukti kamu luar biasa 💪✨</p>
-  <button onclick="dropCoin()">Klik di sini!</button>
+  <p id="message">Kamu luar biasa dan kuat banget 💪✨</p>
+  <button onclick="showMessage()">Klik di sini!</button>
+  <div id="marioContainer"></div>
 
   <script>
-    function dropCoin() {
-      const coin = document.createElement("div");
-      coin.classList.add("coin");
-      coin.innerText = "💰";
-      coin.style.left = Math.random() * 90 + "%";
-      document.body.appendChild(coin);
-      setTimeout(() => coin.remove(), 1500);
+    const messages = [
+      "Kamu luar biasa dan kuat banget 💪✨",
+      "Semangat terus Marioo! Kamu bikin bangga ❤️",
+      "Hari ini mungkin berat, tapi kamu lebih kuat! 🌟",
+      "Aku percaya kamu bisa melalui semuanya 💖",
+      "Rehat itu bukan lemah, itu tanda bijak 🍵",
+      "Marioo itu keren banget, jangan lupa itu! 😎",
+      "Kamu udah sejauh ini, hebat! Teruskan ya 💫",
+      "Semua usaha kamu nggak sia-sia kok ✨",
+      "Aku dukung kamu terus, dari sini! 🫶",
+      "Kamu bikin dunia ini lebih cerah! 🌈"
+    ];
+
+    function showMessage() {
+      const randomIndex = Math.floor(Math.random() * messages.length);
+      document.getElementById("message").innerText = messages[randomIndex];
+
+      const mario = document.createElement("div");
+      mario.className = "mario";
+      mario.innerText = "🧑‍🔧";
+      document.getElementById("marioContainer").appendChild(mario);
+
+      setTimeout(() => {
+        mario.remove();
+      }, 1000);
     }
   </script>
 </body>
