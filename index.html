@@ -2,12 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Semangat Buat Marioo 🍄</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
     body {
       font-family: 'Press Start 2P', cursive;
-      background: url('https://i.imgur.com/jHShxqN.png') repeat-x bottom / contain, linear-gradient(#87ceeb, #fff);
+      background: url('https://i.imgur.com/jHSHxqN.png') repeat-x bottom / contain,
+                  linear-gradient(#87ceeb, #fff);
       background-repeat: repeat-x;
       background-size: auto 200px, cover;
       display: flex;
@@ -28,6 +30,8 @@
       background: rgba(0, 0, 0, 0.5);
       padding: 10px;
       border-radius: 10px;
+      margin: 0 20px;
+      text-align: center;
     }
     button {
       margin-top: 20px;
@@ -51,20 +55,25 @@
       pointer-events: none;
     }
     @keyframes jumpUp {
-      0% {
-        transform: translateY(0);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-200px);
-        opacity: 0;
-      }
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-200px); opacity: 0; }
     }
   </style>
 </head>
 <body>
-  <h1>Let's-a Go, Marioo! 🎮</h1>
-  <p>Klik tombolnya kalau kamu butuh semangat dari Player 2 kamu ❤️</p>
-  <button onclick="semangatMarioo()">🍄 POWER UP!</button>
+  <h1>Semangat Marioo! 🍄</h1>
+  <p>Kamu hebat banget! Capek kerja itu bukti kamu luar biasa 💪✨</p>
+  <button onclick="dropCoin()">Klik di sini!</button>
 
-  <
+  <script>
+    function dropCoin() {
+      const coin = document.createElement("div");
+      coin.classList.add("coin");
+      coin.innerText = "💰";
+      coin.style.left = Math.random() * 90 + "%";
+      document.body.appendChild(coin);
+      setTimeout(() => coin.remove(), 1500);
+    }
+  </script>
+</body>
+</html>
