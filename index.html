@@ -1,109 +1,116 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8"/>
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Semangat Buat Marioo 🍄</title>
+  <title>Semangat Marioo 🐶💙</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500&display=swap');
 
     body {
-      font-family: 'Press Start 2P', cursive;
-      background: linear-gradient(#87ceeb, #fff);
+      font-family: 'Fredoka', sans-serif;
+      background: linear-gradient(to bottom, #d4f0ff, #e6f7ff);
+      height: 100vh;
+      margin: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-end;
-      height: 100vh;
-      margin: 0;
+      justify-content: center;
       overflow: hidden;
       position: relative;
     }
-    h1 { color: #fff100; text-shadow:2px 2px #000; margin:30px 0 10px; }
-    #message {
-      background: rgba(0,0,0,0.7);
-      color: #fff;
-      padding: 10px 20px;
-      border-radius: 12px;
-      margin-bottom: 20px;
-      max-width: 90%;
+
+    h1 {
+      font-size: 1.8rem;
+      color: #2a8dd2;
+      margin-bottom: 10px;
       text-align: center;
     }
-    .brick-box {
-      width: 60px; height:60px;
-      background: url('https://i.imgur.com/ESbFzjt.png') no-repeat center/cover;
-      margin-bottom: 20px;
-      position: relative;
+
+    #message {
+      background: #ffffffcc;
+      padding: 16px 24px;
+      border-radius: 16px;
+      font-size: 1.1rem;
+      color: #333;
+      text-align: center;
+      max-width: 90%;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      margin-bottom: 24px;
     }
-    .coin {
-      width: 30px;
-      position: absolute;
-      top: -40px;
-      left: 50%;
-      transform: translateX(-50%);
-      animation: coinUp 0.8s ease-out forwards;
-    }
-    @keyframes coinUp {
-      0% { opacity:1; transform: translateX(-50%) translateY(0); }
-      100% { opacity:0; transform: translateX(-50%) translateY(-100px); }
-    }
+
     button {
-      background: url('https://i.imgur.com/5Z7K0u2.png') no-repeat center/cover;
-      width:160px; height:50px;
-      border:none;
-      font-family:'Press Start 2P', cursive;
-      color:#fff; font-size:0.6rem;
-      cursor:pointer;
-      margin-bottom:40px;
+      background-color: #2a8dd2;
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 40px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.2s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
-    .mario {
-      width:60px;
-      position:absolute;
-      bottom:50px;
-      animation: jumpMario 0.5s ease-out forwards;
+
+    button:hover {
+      background-color: #1b6ca8;
     }
-    @keyframes jumpMario {
-      0% { bottom:50px; }
-      50% { bottom:150px; }
-      100% { bottom:50px; }
+
+    .emoji {
+      position: absolute;
+      font-size: 2.2rem;
+      animation: floatUp 1.4s ease-out forwards;
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0); opacity: 1; }
+      50% { transform: translateY(-100px); }
+      100% { transform: translateY(-200px); opacity: 0; }
     }
   </style>
 </head>
 <body>
-  <h1>Semangat Marioo! 🍄</h1>
-  <div id="message">Kamu luar biasa! 💪✨</div>
-  <div class="brick-box" id="brickBox"></div>
-  <button onclick="triggerAction()">Klik di sini!</button>
+
+  <h1>Semangat Marioo! 🐾</h1>
+  <div id="message">Kamu anak baik banget hari ini! 🐶✨</div>
+  <button onclick="showMessage()">Klik aku ya 🐕</button>
 
   <script>
     const messages = [
-      "Kamu keren banget! 💥",
-      "Aku percaya kamu bisa! 🚀",
-      "Semangat terus yaa 💛",
-      "Jangan menyerah, aku dukung kamu! ✨",
-      "Satu langkah lagi! 💫",
-      "Marioo, kamu inspirasi! 🏆"
+      "Hari ini kamu udah hebat banget! 🦴💙",
+      "Jangan lupa makan yang enak ya 🍖🐶",
+      "Marioo, kamu bikin dunia lebih cerah 🌟🐾",
+      "Rehat sejenak juga penting lho! 😌💤",
+      "Aku bangga punya kamu! 🐶💖",
+      "Wuff! Kamu luar biasaaa! 🐕✨",
+      "Ayo semangat terus, paw-sitive vibes! 🐾💙",
+      "Dunia butuh energi kamu! 😍🌈",
+      "Gigit semua tantangan! 🐶🔥",
+      "Banyak yang sayang kamu, termasuk aku 💌🐕"
     ];
-    let index = 0;
 
-    function triggerAction() {
-      index = (index + 1) % messages.length;
-      document.getElementById("message").textContent = messages[index];
+    const emojis = [
+      "🐶", "🐾", "🐕", "🦴", "💙", "😋", "🥎", "🐕‍🦺", "🎾", "🐩"
+    ];
 
-      // Mario lompat
-      const mario = document.createElement("img");
-      mario.src = "https://i.imgur.com/sN0bGvB.gif";
-      mario.className = "mario";
-      document.body.appendChild(mario);
-      setTimeout(()=> mario.remove(),600);
+    function showMessage() {
+      // Ganti pesan
+      const msg = document.getElementById("message");
+      const newMsg = messages[Math.floor(Math.random() * messages.length)];
+      msg.innerText = newMsg;
 
-      // Koin dari bata
-      const coin = document.createElement("img");
-      coin.src = "https://i.imgur.com/o3bDg0B.gif";
-      coin.className = "coin";
-      document.getElementById("brickBox").appendChild(coin);
-      setTimeout(()=> coin.remove(),800);
+      // Buat emoji muncul
+      const emoji = document.createElement("div");
+      emoji.className = "emoji";
+      emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+      emoji.style.left = `${Math.random() * 80 + 10}%`;
+      emoji.style.bottom = "80px";
+      document.body.appendChild(emoji);
+
+      // Hapus setelah animasi
+      setTimeout(() => emoji.remove(), 1400);
     }
   </script>
+
 </body>
 </html>
